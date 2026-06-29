@@ -115,8 +115,11 @@ button {
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 72%, rgb(255 189 93 / 18%), transparent 30%),
-    linear-gradient(180deg, rgb(4 9 12 / 26), rgb(4 9 12 / 58));
+    linear-gradient(180deg, rgb(5 9 11 / 18%), rgb(5 9 11 / 64%)),
+    linear-gradient(90deg, rgb(5 9 11 / 42%), transparent 42%, rgb(5 9 11 / 18%)),
+    url("./assets/roughroad-splash.png");
+  background-position: center;
+  background-size: cover;
   cursor: pointer;
   transition:
     opacity 320ms ease,
@@ -131,12 +134,9 @@ button {
 
 #start-gate div {
   width: min(440px, calc(100vw - 48px));
-  padding: 26px;
-  border: 1px solid rgb(245 242 233 / 20%);
-  border-radius: 8px;
-  background: rgb(17 21 18 / 52%);
-  text-align: center;
-  backdrop-filter: blur(18px);
+  padding: 0;
+  text-align: left;
+  text-shadow: 0 4px 26px rgb(0 0 0 / 60%);
 }
 
 #start-gate h1 {
@@ -149,7 +149,7 @@ button {
 
 #start-gate p {
   margin: 12px 0 0;
-  color: rgb(245 242 233 / 72%);
+  color: rgb(245 242 233 / 84%);
   font-size: 15px;
   font-weight: 700;
 }

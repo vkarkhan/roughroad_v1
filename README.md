@@ -59,7 +59,7 @@ That route steps the car with synthetic left and right steering, then writes pas
 
 - left and right steering inputs are opposite;
 - front-wheel yaw follows the corrected visual direction;
-- right steering moves the vehicle farther right than left steering;
+- right steering moves the vehicle screen-right relative to left steering in the chase camera;
 - throttle produces motion.
 
 The route is passive and does not affect normal gameplay.
