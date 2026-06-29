@@ -41,7 +41,7 @@ export interface RoughRoadDebugState {
 export interface RoughRoadSmokeResult {
   checks: {
     frontWheelYawOpposesPerInputDirection: boolean;
-    rightInputMovesRightOfLeftInput: boolean;
+    rightInputMovesScreenRightOfLeftInput: boolean;
     steeringInputsAreOpposite: boolean;
     throttleProducesMotion: boolean;
   };
@@ -162,7 +162,7 @@ export class RoughRoadGame {
       left,
       checks: {
         frontWheelYawOpposesPerInputDirection: right.frontWheelYaw < 0 && left.frontWheelYaw > 0,
-        rightInputMovesRightOfLeftInput: right.x > left.x,
+        rightInputMovesScreenRightOfLeftInput: right.x < left.x,
         steeringInputsAreOpposite: right.steerVisual > 0 && left.steerVisual < 0,
         throttleProducesMotion: right.speed > 1 && left.speed > 1,
       },

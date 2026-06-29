@@ -22,11 +22,12 @@ export class Vehicle {
   readonly position = new Vector3();
   speed = 0;
   grip = 1;
+  private readonly steerYawSign = -1;
   private heading = 0;
   private steerVisual = 0;
   private wheelSpin = 0;
   private readonly frontWheels: Object3D[] = [];
-  private readonly wheelMeshes: Mesh[] = [];
+  private readonly wheelRollers: Object3D[] = [];
   private frontWheelYaw = 0;
 
   constructor(scene: Scene, private readonly road: RoadModel) {
@@ -74,7 +75,8 @@ export class Vehicle {
     this.speed = clamp(this.speed, -12, 66);
     this.grip = clamp(1 - offroad * 0.45 - input.handbrake * 0.32, 0.38, 1);
     this.steerVisual = damp(this.steerVisual, input.steer, 8, dt);
-    this.heading += this.steerVisual * this.speed * (0.013 + speedAbs * 0.00018) * this.grip * dt;
+    this.heading +=
+      this.steerYawSign * this.steerVisual * this.speed * (0.013 + speedAbs * 0.00018) * this.grip * dt;
 
     const forward = this.forward;
     this.position.x += forward.x * this.speed * dt;
@@ -96,8 +98,8 @@ export class Vehicle {
     this.group.rotation.set(roadPitch, this.heading, bodyRoll);
 
     this.wheelSpin += this.speed * dt * 1.9;
-    for (const wheel of this.wheelMeshes) {
-      wheel.rotation.x = this.wheelSpin;
+    for (const roller of this.wheelRollers) {
+      roller.rotation.x = this.wheelSpin;
     }
     for (const wheel of this.frontWheels) {
       this.frontWheelYaw = -this.steerVisual * 0.48;
@@ -207,23 +209,26 @@ export class Vehicle {
         const pivot = new Object3D();
         pivot.position.set(x, 0.46, z);
 
+        const roller = new Object3D();
+        pivot.add(roller);
+
         const wheel = new Mesh(new CylinderGeometry(0.5, 0.5, 0.42, 32), tireMaterial);
         wheel.rotation.z = Math.PI * 0.5;
         wheel.castShadow = true;
-        pivot.add(wheel);
+        roller.add(wheel);
 
         const rim = new Mesh(new CylinderGeometry(0.28, 0.28, 0.46, 24), rimMaterial);
         rim.rotation.z = Math.PI * 0.5;
         rim.castShadow = true;
-        pivot.add(rim);
+        roller.add(rim);
 
         const rimRing = new Mesh(new TorusGeometry(0.3, 0.025, 8, 24), rimMaterial);
         rimRing.rotation.y = Math.PI * 0.5;
         rimRing.castShadow = true;
-        pivot.add(rimRing);
+        roller.add(rimRing);
 
         this.group.add(pivot);
-        this.wheelMeshes.push(wheel);
+        this.wheelRollers.push(roller);
 
         if (z > 0) {
           this.frontWheels.push(pivot);
