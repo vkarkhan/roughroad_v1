@@ -1,0 +1,180 @@
+:root {
+  color: #f5f2e9;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #111512;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+}
+
+#game-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #101b20;
+}
+
+#hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(78px, 1fr));
+  gap: 8px;
+  min-width: 310px;
+  max-width: min(440px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.stat {
+  min-height: 62px;
+  padding: 10px 12px;
+  border: 1px solid rgb(245 242 233 / 18%);
+  border-radius: 8px;
+  background: rgb(17 21 18 / 62%);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
+}
+
+.stat span {
+  display: block;
+  color: rgb(245 242 233 / 62%);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.stat strong {
+  display: block;
+  margin-top: 4px;
+  color: #fffdf6;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+#drive-panel {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+#drive-panel button {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid rgb(245 242 233 / 16%);
+  background: rgb(17 21 18 / 66%);
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+#drive-panel button:hover {
+  transform: translateY(-1px);
+  background: rgb(63 79 63 / 70%);
+}
+
+#drive-panel span {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+#start-gate {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 72%, rgb(255 189 93 / 18%), transparent 30%),
+    linear-gradient(180deg, rgb(4 9 12 / 26), rgb(4 9 12 / 58));
+  cursor: pointer;
+  transition:
+    opacity 320ms ease,
+    visibility 320ms ease;
+}
+
+#start-gate.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#start-gate div {
+  width: min(440px, calc(100vw - 48px));
+  padding: 26px;
+  border: 1px solid rgb(245 242 233 / 20%);
+  border-radius: 8px;
+  background: rgb(17 21 18 / 52%);
+  text-align: center;
+  backdrop-filter: blur(18px);
+}
+
+#start-gate h1 {
+  margin: 0;
+  color: #fffdf6;
+  font-size: clamp(42px, 9vw, 82px);
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+#start-gate p {
+  margin: 12px 0 0;
+  color: rgb(245 242 233 / 72%);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (max-width: 620px) {
+  #hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+  .stat.compact {
+    display: none;
+  }
+
+  .stat {
+    min-height: 56px;
+  }
+
+  .stat strong {
+    font-size: 19px;
+  }
+
+  #drive-panel {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+  }
+}

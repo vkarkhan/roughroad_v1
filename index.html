@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rough Road v1 - a browser-based procedural vehicle driving prototype."
+    />
+    <title>Rough Road v1</title>
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="game-canvas" aria-label="Rough Road driving scene"></canvas>
+      <section id="hud" aria-label="Vehicle telemetry">
+        <div class="stat">
+          <span>Speed</span>
+          <strong id="speed">0</strong>
+        </div>
+        <div class="stat">
+          <span>Route</span>
+          <strong id="distance">0.0 km</strong>
+        </div>
+        <div class="stat compact">
+          <span>Grip</span>
+          <strong id="grip">100%</strong>
+        </div>
+      </section>
+      <section id="drive-panel" aria-label="Driving controls">
+        <button id="camera-button" type="button" title="Camera">
+          <span>CAM</span>
+        </button>
+        <button id="reset-button" type="button" title="Reset">
+          <span>RST</span>
+        </button>
+      </section>
+      <div id="start-gate" role="button" tabindex="0" aria-label="Start driving">
+        <div>
+          <h1>Rough Road</h1>
+          <p>Procedural highway test route</p>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
